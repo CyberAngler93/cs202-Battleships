@@ -1,0 +1,15 @@
+#include <iostream>
+#include <vector>
+#include "Board.hpp"
+using namespace std;
+
+int main() {
+	Board p1("William");
+	Board p2("Parker");
+	cout << p1 << endl << p2 << endl;;
+	p1.attack(p1, p2, 2, 4);
+	cout << p1 << endl;
+	cout << p2 << endl;
+	cin.get();
+	return 0;
+}

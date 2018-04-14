@@ -1,0 +1,59 @@
+#include "Board.hpp"
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::ostream;
+#include <vector>
+using std::vector;
+#include <string>
+using std::string;
+
+Board::Board(string p) {
+	// sets the players name
+	_player = p;
+	// next two lines creates the 2d vector for the initial position board
+	_state.resize(rows, vector<char>(cols, 'O'));
+	cout << "Creating position board." << endl;
+	// next two lines creates the 2D vector for the attack board
+	_attack.resize(rows, vector<char>(cols, '0'));
+	cout << "Creating attack board." << endl;
+}
+ostream& operator<<(ostream& output, const Board& bPrint) {
+	// prints out the players name
+	output << bPrint._player;
+	output << endl;
+	// prints the attack board for selected player
+	for (int i = 0; i < bPrint.rows; i++) {
+		for (int j = 0; j < bPrint.cols; j++) {
+			output << bPrint._attack[i][j];
+		}
+		output << endl;
+	}
+	output << endl;
+	// prints out defense board for selected player
+	for (int i = 0; i < bPrint.rows; i++) {
+		for (int j = 0; j < bPrint.cols; j++) {
+			output << bPrint._state[i][j];
+		}
+		output << endl;
+	}
+	return output;
+}
+// rudimentary attack function
+void Board::attack(Board& pA, Board& pD, int x, int y) {
+	// Checks if the space is open
+	if (pD._state[x][y] != 'O') {
+		// if space isn't open then a hit is declared
+		cout <<"Hit!" << endl;
+		// posistion attacked is changed to represent a hit on the attack and defense boards
+		pD._state[x][y] = 'D';
+		pA._attack[x][y] = 'H';
+	}
+	else {
+		// is space is open a miss is declared
+		cout << "Miss :c" << endl;
+		// position attacked is changed to represent a miss on the attack and defense boards
+		pD._state[x][y] = 'X';
+		pA._attack[x][y] = 'M';
+	}
+ }
