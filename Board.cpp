@@ -17,19 +17,19 @@ void Board::print()
 }
 void Board::shot(char y,int x, bool isHit)
 {
-    if(board[x][toInt(y)]==0)
+    if(board[x-1][toInt(y)]==0)
     {
         if(isHit)
-            board[x][toInt(y)]=2;
+            board[x-1][toInt(y)]=2;
         else
-            board[x][toInt(y)]=1;
+            board[x-1][toInt(y)]=1;
     }
     else
         std::cout<<"Error in Board::shot(): location is already hit("<<y<<","<<x<<")"<<std::endl;
 }
 int Board::get(char y, int x)
 {
-    return board[x][toInt(y)];
+    return board[x-1][toInt(y)];
 }
 int Board::toInt(char c)
 {
