@@ -80,6 +80,8 @@ bool Ship::isHit(char userVerticalCharShot , int userHorizonalCharShot){
         if(_shipLocation.verticalLocation[i] == userVerticalCharShot){
 
             if(_shipLocation.horizonalLocation[i] == userHorizonalCharShot){
+                int x = getShipHealth();
+                setShipHealth(x-1);
                 return true;
             }
         }
