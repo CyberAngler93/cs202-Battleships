@@ -2,3 +2,6 @@
 
 !readme.txt
 !.gitignore
+!game.cpp
+!game.hpp
+!cmd_line_game.cpp
