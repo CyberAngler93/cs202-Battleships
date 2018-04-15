@@ -42,7 +42,7 @@ ShipLocation Ship::getShipLoaction()const{
     return _shipLocation;
 }
 
-void Ship::setShipLocation(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+void Ship::setShipLocation(char userVerticalLocation , int userHorizonalLocation, ShipOrientation userShipDirection){
     int range = getShipHealth();
     for(int i = 0; i < range; i++){
             _shipLocation.horizonalLocation.push_back(userHorizonalLocation);
@@ -75,6 +75,18 @@ void Ship::setShipType(ShipType userShipType){
     _shipType = userShipType;
 }
 
+bool Ship::isHit(char userVerticalCharShot , int userHorizonalCharShot){
+    for(auto i = 0; i < getShipSize(); i++){
+        if(_shipLocation.verticalLocation[i] == userVerticalCharShot){
+
+            if(_shipLocation.horizonalLocation[i] == userHorizonalCharShot){
+                return true;
+            }
+        }
+    }
+    return false;
+
+}
 bool Ship::isDestroyed(){
     if(getShipHealth() == 0){
         return true;
@@ -88,7 +100,7 @@ void Ship::print(std::ostream & os) const{
     os << std::endl;
     os << getShipType() << " is located at these points " << std::endl;
     for(auto i = 0; i < getShipSize(); i++){
-        os << _shipLocation.horizonalLocation[i] << " : " << _shipLocation.verticalLocation[i];
+        os << _shipLocation.verticalLocation[i] << " : " << _shipLocation.horizonalLocation[i];
         os << std::endl;
     }
     os << "and has " << getShipHealth() << " health remaining" << std::endl;
@@ -108,9 +120,9 @@ Carrier::Carrier(){
     setShipSize(5);
 }
 
-Carrier::Carrier(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+Carrier::Carrier(char userVerticalLocation, int userHorizonalLocation, ShipOrientation userShipDirection){
     setShipHealth(5);
-    setShipLocation(userHorizonalLocation, userVerticalLocation, userShipDirection);
+    setShipLocation(userVerticalLocation, userHorizonalLocation, userShipDirection);
     setShipType(CARRIER);
     setShipSize(5);
 }
@@ -126,12 +138,12 @@ Carrier::~Carrier(){
 
 Battleship::Battleship(){
     setShipHealth(4);
-    setShipLocation('a',1,DOWN);
+    setShipLocation('a',2,DOWN);
     setShipType(BATTLESHIP);
     setShipSize(4);
 }
 
-Battleship::Battleship(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+Battleship::Battleship(char userHorizonalLocation, int userVerticalLocation, ShipOrientation userShipDirection){
     setShipHealth(4);
     setShipLocation(userHorizonalLocation, userVerticalLocation, userShipDirection);
     setShipType(BATTLESHIP);
@@ -149,12 +161,12 @@ Battleship::~Battleship(){
 
 Cruiser::Cruiser(){
     setShipHealth(3);
-    setShipLocation('a',1,DOWN);
+    setShipLocation('a',3,DOWN);
     setShipType(CRUISER);
     setShipSize(3);
 }
 
-Cruiser::Cruiser(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+Cruiser::Cruiser(char userHorizonalLocation, int userVerticalLocation, ShipOrientation userShipDirection){
     setShipHealth(3);
     setShipLocation(userHorizonalLocation, userVerticalLocation, userShipDirection);
     setShipType(CRUISER);
@@ -172,12 +184,12 @@ Cruiser::~Cruiser(){
 
 Submarine::Submarine(){
     setShipHealth(3);
-    setShipLocation('a',1,DOWN);
+    setShipLocation('a',4,DOWN);
     setShipType(SUBMARINE);
     setShipSize(3);
 }
 
-Submarine::Submarine(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+Submarine::Submarine(char userHorizonalLocation, int userVerticalLocation, ShipOrientation userShipDirection){
     setShipHealth(3);
     setShipLocation(userHorizonalLocation, userVerticalLocation, userShipDirection);
     setShipType(SUBMARINE);
@@ -192,15 +204,14 @@ Submarine::Submarine(const Submarine & oldSubmarine){
 Submarine::~Submarine(){
 //NEED TO FINISH DESTRUCTOR
 }
-
 Destroyer::Destroyer(){
     setShipHealth(2);
-    setShipLocation('a',1,DOWN);
+    setShipLocation('a',5,DOWN);
     setShipType(DESTROYER);
     setShipSize(2);
 }
 
-Destroyer::Destroyer(int userHorizonalLocation, char userVerticalLocation, ShipOrientation userShipDirection){
+Destroyer::Destroyer(char userHorizonalLocation, int userVerticalLocation, ShipOrientation userShipDirection){
     setShipHealth(2);
     setShipLocation(userHorizonalLocation, userVerticalLocation, userShipDirection);
     setShipType(DESTROYER);
@@ -215,5 +226,3 @@ Destroyer::Destroyer(const Destroyer & oldDestroyer){
 Destroyer::~Destroyer(){
 //NEED TO FINISH DESTRUCTOR
 }
-
-
