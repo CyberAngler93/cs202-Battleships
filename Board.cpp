@@ -1,21 +1,14 @@
-#include "Board.hpp"
+#include "board.hpp"
 #include <iostream>
-using std::vector;
 Board::Board()
 {
-     for(int i=0;i<10;i++)
-    {
-        for(int j=0;j<10;j++)
-        {
-            board[i][j]=0;
-        }
-    }
+    board = std::vector<std::vector<int>>(10,std::vector<int>(10));
 }
 void Board::print()
 {
-    for(int i=0;i<10;i++)
+    for(int i=0; i<10; i++)
     {
-        for(int j=0;j<10;j++)
+        for(int j=0; j<10; j++)
         {
             std::cout<<board[j][i];
         }
@@ -32,8 +25,7 @@ void Board::shot(char y,int x, bool isHit)
             board[x][toInt(y)]=1;
     }
     else
-        std::cout<<"Error in Board::shot(): location is already hit("<<y<<","<<x<<")";
-
+        std::cout<<"Error in Board::shot(): location is already hit("<<y<<","<<x<<")"<<std::endl;
 }
 int Board::get(char y, int x)
 {

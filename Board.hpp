@@ -1,8 +1,6 @@
-#ifndef Board_HPP
-#define Board_HPP
-
-#include<Vector>
-
+#ifndef board_HPP
+#define board_HPP
+#include<vector>
 class Board
 {
 public:
@@ -11,13 +9,10 @@ public:
     int get(char y,int x);
     void print();
 private:
-    int board[10][10];
+    std::vector<std::vector<int>> board;
     int toInt(char c);
 };
 // 0 = no interaction
 // 1 = miss
 // 2 = hit
-
-
-
 #endif
