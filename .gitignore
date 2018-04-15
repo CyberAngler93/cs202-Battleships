@@ -1,10 +1,15 @@
 *
+
 !ship.cpp
 !ship.hpp
+
 !board.cpp
 !board.hpp
+
 !readme.txt
 !.gitignore
+
 !game.cpp
 !game.hpp
+
 !cmd_line_game.cpp
