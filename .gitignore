@@ -1,4 +1,7 @@
 *
-
+!ship.cpp
+!ship.hpp
+!board.cpp
+!board.hpp
 !readme.txt
 !.gitignore
