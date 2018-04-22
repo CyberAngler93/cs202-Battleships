@@ -1,6 +1,13 @@
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *	Filename:		ship.cpp
+ *	Class :			CS 202
+ *	Purpose:		Group Project: BattleShips
+ */
+
+#include <SFML/Graphics.hpp>
 
 #include "../include/ship.hpp"
-#include <SFML/Graphics.hpp>
+
 #include <stdexcept>
 
 // Constructors

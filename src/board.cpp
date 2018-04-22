@@ -1,3 +1,9 @@
+/*  Authors:        Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *  Filename:       board.cpp
+ *  Class :         CS 202
+ *  Purpose:        Group Project: BattleShips
+ */
+
 #include "../include/board.hpp"
 
 Board::Board()
@@ -17,13 +23,13 @@ Board::Board()
 
     _boardSquares = std::vector<sf::RectangleShape>{200};
 
-    for (auto index = 0; index < _boardSquares.size(); ++index){
+    for (auto index = 0; index < _boardSquares.size(); ++index)
+    {
         auto column = index % 10;
         auto row = (index - column)/ 10;
 
         // Shift the second board one row down
-        if (row >= 10)
-            row += 1;
+        if ( row >= 10 ) row += 1;
 
         sf::Vector2f position{(float) column*40, (float) row*40};
 
@@ -41,7 +47,8 @@ void Board::draw(sf::RenderWindow & window)
     window.draw(_backgroundSprite);
 
     // Draw squares
-    for (auto temp : _boardSquares) {
+    for (auto temp : _boardSquares) 
+    {
         window.draw(temp);
     }
 };
@@ -56,17 +63,18 @@ int Board::getMouseSquare(sf::RenderWindow & window) const
     auto column = localPosition.x / 40;
     auto row = localPosition.y / 40;
 
-    // These are invalid coordinates
-    if (column < 0 || column >= 10 || row < 0 || row >= 21)
+    if ( column < 0 || column >= 10 || row < 0 || row >= 21 || row == 10 )
+    {
+        // invalid coordinates and the *raw* row 10 is empty because the second board is shifted down
         return -1;
-
-    if (row == 10) {
-        // The *raw* row 10 is empty because the second board is shifted down
-        return -1;
-    } else if (row > 10) {
+    } 
+    else if ( row > 10 ) 
+    {
         // Second board is shifted down by one row
         return (row - 1) * 10 + column;
-    } else {
+    }
+    else 
+    {
         return row * 10 + column;
     }
 };

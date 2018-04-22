@@ -1,4 +1,8 @@
-
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *	Filename:		ship.hpp
+ *	Class :			CS 202
+ *	Purpose:		Group Project: BattleShips
+ */
 
 #ifndef __SHIP_HPP__
 #define __SHIP_HPP__
@@ -24,8 +28,6 @@ public:
 
 
 private:
-	int _health;
-	
 	int _position;
 	int _width;
 	int _height;

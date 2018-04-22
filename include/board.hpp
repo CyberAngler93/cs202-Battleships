@@ -1,3 +1,9 @@
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *	Filename:		board.hpp
+ *	Class :			CS 202
+ *	Purpose:		Group Project: BattleShips
+ */
+
 #ifndef __BOARD_HPP__
 #define __BOARD_HPP__
 #include <SFML/Graphics.hpp>

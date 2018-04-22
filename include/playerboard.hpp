@@ -1,4 +1,8 @@
-
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *	Filename:		playerboard.hpp
+ *	Class :			CS 202
+ *	Purpose:		Group Project: BattleShips
+ */
 
 #ifndef __PLAYERBOARD_HPP__
 #define __PLAYERBOARD_HPP__
@@ -8,8 +12,8 @@
 #include "../include/playerboard.hpp"
 #include "../include/ship.hpp"
 
-#include <utility> // std::pair
-#include <vector> // std::vector
+#include <utility>
+#include <vector>
 
 class PlayerBoard
 {
@@ -21,6 +25,7 @@ public:
 	void draw(sf::RenderWindow & window, bool turn);
 
 	bool addShip(const Ship &);
+	int victoryConditions();
 	
 	std::pair<bool,bool> getSquare(int index);
 	void setSquare(int index, const std::pair<bool,bool> & newSquare);

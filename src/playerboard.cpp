@@ -1,11 +1,15 @@
-
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+ *	Filename:		playerboard.cpp
+ *	Class :			CS 202
+ *	Purpose:		Group Project: BattleShips
+ */
 
 #include "../include/playerboard.hpp"
 #include "../include/ship.hpp"
 
 #include <utility>
 #include <vector>
-#include <stdexcept> // std::logic_error
+#include <stdexcept>
 
 
 
@@ -15,7 +19,8 @@ PlayerBoard::PlayerBoard()
 	_board = std::vector< std::pair<bool,bool> >{100};
 	_shots = std::vector<sf::CircleShape>{_board.size()};
 
-	for (auto index = 0; index < _board.size(); ++index) {
+	for (auto index = 0; index < _board.size(); ++index) 
+	{
 		_board[index].first = false; // has been fired at
 		_board[index].second = false; // contains ship
 
@@ -33,10 +38,14 @@ PlayerBoard::PlayerBoard()
 // Member functions
 void PlayerBoard::draw(sf::RenderWindow & window, bool turn)
 {
-	for (auto shot : _shots) {
-		if (!turn) {
+	for (auto shot : _shots) 
+	{
+		if ( !turn ) 
+		{
 			window.draw(shot);
-		} else {
+		} 
+		else 
+		{
 			shot.setPosition(shot.getPosition().x, shot.getPosition().y + 440);
 			window.draw(shot);
 			shot.setPosition(shot.getPosition().x, shot.getPosition().y - 440);
@@ -86,8 +95,20 @@ bool PlayerBoard::addShip(const Ship & newShip)
 	}
 	else
 	{
-		throw std::logic_error("Error in PlayerBoard::addShip -- Ship placement illegal.");
+		return false;
 	}
+};
+
+int PlayerBoard::victoryConditions()
+{
+	for (auto i:_board)
+	{
+		if ( i.first == false && i.second == true )
+		{
+			return 0;
+		}
+	}
+	return 1;
 };
 
 std::pair<bool,bool> PlayerBoard::getSquare(int index)
