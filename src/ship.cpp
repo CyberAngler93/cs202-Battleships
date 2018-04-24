@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *	Filename:		ship.cpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
@@ -12,8 +12,8 @@
 
 // Constructors
 Ship::Ship(int position, int width, int height)
-	:_position(position), 
-	_width(width), 
+	:_position(position),
+	_width(width),
 	_height(height)
 {
 	if ( width != 1 && height != 1 )

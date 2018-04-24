@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *	Filename:		main.cpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
@@ -34,7 +34,7 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
     sprites.push_back(sf::Sprite(battleshipText));
     sprites.push_back(sf::Sprite(carrierText));
 
-    for (sf::Sprite &temp : sprites) 
+    for (sf::Sprite &temp : sprites)
     {
     	temp.setPosition(temp.getPosition().x + 0, temp.getPosition().y + 180);
     }
@@ -42,34 +42,34 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 	while( window.isOpen() && !shipPlacement.empty() )
 	{
 		sf::Event event;
-		while ( window.pollEvent(event) ) 
+		while ( window.pollEvent(event) )
 		{
 			//Close window: exit
-			if (event.type == sf::Event::Closed) 
+			if (event.type == sf::Event::Closed)
 			{
 				window.close();
-			} 
-			else if ( event.type == sf::Event::MouseButtonPressed ) 
+			}
+			else if ( event.type == sf::Event::MouseButtonPressed )
 			{
 				auto index =  board.getMouseSquare(window);
-				if (index >= 100 && index < 200) 
+				if (index >= 100 && index < 200)
 				{
-					if ( sf::Mouse::isButtonPressed(sf::Mouse::Left) ) 
+					if ( sf::Mouse::isButtonPressed(sf::Mouse::Left) )
 					{
 						// Vertical ship placement
 						Ship temp{index - 100, 1, shipPlacement.back()};
-						if ( playerBoard.addShip(temp) ) 
+						if ( playerBoard.addShip(temp) )
 						{
 							ships.push_back(temp);
 							shipPlacement.pop_back();
 							sprites.pop_back();
 						}
-					} 
-					else if ( sf::Mouse::isButtonPressed(sf::Mouse::Right) ) 
+					}
+					else if ( sf::Mouse::isButtonPressed(sf::Mouse::Right) )
 					{
 						// Horizontal ship placement
 						Ship temp{index - 100, shipPlacement.back(), 1};
-						if (playerBoard.addShip(temp)) 
+						if (playerBoard.addShip(temp))
 						{
 							ships.push_back(temp);
 							shipPlacement.pop_back();
@@ -98,9 +98,9 @@ int main()
 	sf::RenderWindow window{sf::VideoMode{400,840}, "SFML Window", sf::Style::Titlebar | sf::Style::Close};
 
 	sf::Texture bannerOne, bannerTwo, instructions1, instructions2;
-	if ( !bannerOne.loadFromFile("../sprites/player_one.png") 
+	if ( !bannerOne.loadFromFile("../sprites/player_one.png")
 			|| !bannerTwo.loadFromFile("../sprites/player_two.png")
-			|| !instructions1.loadFromFile("../sprites/player1instructions.png") 
+			|| !instructions1.loadFromFile("../sprites/player1instructions.png")
 			|| !instructions2.loadFromFile("../sprites/player2instructions.png") )
     {
     	throw std::runtime_error("Error in main -- failed to load sprites.");
@@ -134,31 +134,31 @@ int main()
 		if ( victory == 0 )
 		{
 			sf::Event event;
-			while (window.pollEvent(event)) 
+			while (window.pollEvent(event))
 			{
 				// Close window and exit
-				if (event.type == sf::Event::Closed) 
+				if (event.type == sf::Event::Closed)
 				{
 					window.close();
-				} 
-				else if (event.type == sf::Event::MouseButtonPressed) 
+				}
+				else if (event.type == sf::Event::MouseButtonPressed)
 				{
 					auto index =  board.getMouseSquare(window);
 
-					if (index >= 0 && index < 100) 
+					if (index >= 0 && index < 100)
 					{
-						if (player1_turn) 
+						if (player1_turn)
 						{
-							if (!player2.getSquare(index).first) 
+							if (!player2.getSquare(index).first)
 							{
 								player2.setSquare(index, std::make_pair(true, player2.getSquare(index).second));
 								player1_turn = false;
 								victory = player2.victoryConditions();
 							}
-						} 
-						else 
+						}
+						else
 						{
-							if (!player1.getSquare(index).first) 
+							if (!player1.getSquare(index).first)
 							{
 								player1.setSquare(index, std::make_pair(true, player1.getSquare(index).second));
 								player1_turn = true;
@@ -181,12 +181,12 @@ int main()
 			}
 			player1.draw(window, player1_turn);
 			player2.draw(window, !player1_turn);
-			
-			if (player1_turn) 
+
+			if (player1_turn)
 			{
 				window.draw(playerOneBanner);
-			} 
-			else 
+			}
+			else
 			{
 				window.draw(playerTwoBanner);
 			}
@@ -195,10 +195,10 @@ int main()
 		else
 		{
 			sf::Event event;
-			while (window.pollEvent(event)) 
+			while (window.pollEvent(event))
 			{
 				// Close window and exit
-				if (event.type == sf::Event::Closed) 
+				if (event.type == sf::Event::Closed)
 				{
 					window.close();
 				}

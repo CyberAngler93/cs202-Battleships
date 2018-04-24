@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *	Filename:		ship.hpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
@@ -17,7 +17,7 @@ public:
 
 	// Member Functions
 	void draw(sf::RenderWindow & window, bool turn);
-	
+
 	int getWidth() const;
 	int getHeight() const;
 	int getPosition() const;

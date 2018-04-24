@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *	Filename:		playerboard.hpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
@@ -26,7 +26,7 @@ public:
 
 	bool addShip(const Ship &);
 	int victoryConditions();
-	
+
 	std::pair<bool,bool> getSquare(int index);
 	void setSquare(int index, const std::pair<bool,bool> & newSquare);
 

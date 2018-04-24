@@ -1,4 +1,4 @@
-/*  Authors:        Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*  Authors:        Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *  Filename:       board.cpp
  *  Class :         CS 202
  *  Purpose:        Group Project: BattleShips
@@ -37,28 +37,28 @@ Board::Board()
         _boardSquares[index].setPosition(position);
         _boardSquares[index].setFillColor(sf::Color::Transparent);
         _boardSquares[index].setOutlineColor(sf::Color::White);
-        _boardSquares[index].setOutlineThickness(outlineThickness);            
+        _boardSquares[index].setOutlineThickness(outlineThickness);
     }
 };
 
-void Board::draw(sf::RenderWindow & window) 
-{   
+void Board::draw(sf::RenderWindow & window)
+{
     // Draw background
     window.draw(_backgroundSprite);
 
     // Draw squares
-    for (auto temp : _boardSquares) 
+    for (auto temp : _boardSquares)
     {
         window.draw(temp);
     }
 };
 
 // Returns -1 on fail otherwise returns the index of the square the mouse is over
-int Board::getMouseSquare(sf::RenderWindow & window) const 
+int Board::getMouseSquare(sf::RenderWindow & window) const
 {
     sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 
-    // Local positions less than 
+    // Local positions less than
 
     auto column = localPosition.x / 40;
     auto row = localPosition.y / 40;
@@ -67,13 +67,13 @@ int Board::getMouseSquare(sf::RenderWindow & window) const
     {
         // invalid coordinates and the *raw* row 10 is empty because the second board is shifted down
         return -1;
-    } 
-    else if ( row > 10 ) 
+    }
+    else if ( row > 10 )
     {
         // Second board is shifted down by one row
         return (row - 1) * 10 + column;
     }
-    else 
+    else
     {
         return row * 10 + column;
     }

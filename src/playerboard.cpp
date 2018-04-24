@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
  *	Filename:		playerboard.cpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
@@ -19,7 +19,7 @@ PlayerBoard::PlayerBoard()
 	_board = std::vector< std::pair<bool,bool> >{100};
 	_shots = std::vector<sf::CircleShape>{_board.size()};
 
-	for (auto index = 0; index < _board.size(); ++index) 
+	for (auto index = 0; index < _board.size(); ++index)
 	{
 		_board[index].first = false; // has been fired at
 		_board[index].second = false; // contains ship
@@ -38,13 +38,13 @@ PlayerBoard::PlayerBoard()
 // Member functions
 void PlayerBoard::draw(sf::RenderWindow & window, bool turn)
 {
-	for (auto shot : _shots) 
+	for (auto shot : _shots)
 	{
-		if ( !turn ) 
+		if ( !turn )
 		{
 			window.draw(shot);
-		} 
-		else 
+		}
+		else
 		{
 			shot.setPosition(shot.getPosition().x, shot.getPosition().y + 440);
 			window.draw(shot);
@@ -71,7 +71,7 @@ bool PlayerBoard::addShip(const Ship & newShip)
 		{
 			_board[index +i].second = true;
 		}
-		
+
 		return true;
 	}
 	else if ( height > 1 && index + (height-1)*10 < 100)
@@ -86,7 +86,7 @@ bool PlayerBoard::addShip(const Ship & newShip)
 		{
 			_board[index +i*10].second = true;
 		}
-		
+
 		return true;
 	}
 	else if ( height == 1 && width == 1 )
