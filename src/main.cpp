@@ -90,7 +90,10 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 		}
 		window.display();
 	}
-	for (int i = 0; i < 500000000; i++) {
+	while (true) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+			break;
+		}
 	}
 }
 
@@ -124,14 +127,31 @@ int main()
 
 	std::vector<Ship> player1Ships;
 	std::vector<Ship> player2Ships;
-	placeShips(player1Ships, window, player1instructions, board, player1);
-	window.clear();
-	window.draw(playerTwoBanner);
-	window.display();
-	for (int i = 0; i < 1000000000; i++) {
-
+	while (true) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			placeShips(player1Ships, window, player1instructions, board, player1);
+			break;
+		}
+		else {
+			window.clear();
+			window.draw(playerOneBanner);
+			window.display();
+		}
 	}
-	placeShips(player2Ships, window, player2instructions, board, player2);
+	window.clear();
+
+	while (true) {
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			placeShips(player2Ships, window, player2instructions, board, player2);
+			break;
+		}
+		else {
+		window.clear();
+		window.draw(playerTwoBanner);
+		window.display();
+		}
+	}
+
 	window.clear();
 	window.draw(playerOneBanner);
 	window.display();
@@ -191,15 +211,19 @@ int main()
 								for (int i = 0; i < 500000000; i++) {
 
 								}
-								window.clear();
-								window.draw(playerTwoBanner);
-								window.display();
-								for (int i = 0; i < 1000000000; i++) {
-
+								while (true) {
+									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+										player1_turn = false;
+										break;
+									}
+									else {
+										window.clear();
+										window.draw(playerTwoBanner);
+										window.display();
+									}
 								}
-								player1_turn = false;
 							}
-							
+
 						}
 						else
 						{
@@ -231,13 +255,17 @@ int main()
 								for (int i = 0; i < 500000000; i++) {
 
 								}
-								window.clear();
-								window.draw(playerOneBanner);
-								window.display();
-								for (int i = 0; i < 1000000000; i++) {
-
+								while (true) {
+									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+										player1_turn = true;
+										break;
+									}
+									else {
+										window.clear();
+										window.draw(playerOneBanner);
+										window.display();
+									}
 								}
-								player1_turn = true;
 							}
 						}
 					}
