@@ -20,7 +20,7 @@ Ship::Ship(int position, int width, int height)
 	{
 		throw std::logic_error("Error in Ship::Ship -- ship does not have a dimension equal to 1.");
 	};
-	if ( position < 0 || position > 99 )
+	if ( position < 0 || position > 100 )
 	{
 		throw std::logic_error("Error in Ship::Ship -- Index not in bounds.");
 	}
