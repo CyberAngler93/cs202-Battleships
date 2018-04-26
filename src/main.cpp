@@ -5,7 +5,6 @@
 */
 
 #include <SFML/Graphics.hpp>
-
 #include <../include/board.hpp>
 #include <../include/playerboard.hpp>
 #include <../include/ship.hpp>
@@ -79,7 +78,6 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 				}
 			}
 		}
-
 		window.clear();
 		board.draw(window);
 		window.draw(instructions);
@@ -91,10 +89,17 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 		window.display();
 	}
 	while (true) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-			break;
+		sf::Event event;
+		if (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+				break;
 		}
 	}
+
 }
 
 
@@ -120,28 +125,39 @@ int main()
 
 	sf::Texture victoryTexture;
 	sf::Sprite victoryBanner;
-
 	Board board{};
 	PlayerBoard player1{};
 	PlayerBoard player2{};
 
 	std::vector<Ship> player1Ships;
 	std::vector<Ship> player2Ships;
-	while (true) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-			placeShips(player1Ships, window, player1instructions, board, player1);
-			break;
+	while (true){
+		sf::Event event;
+		if (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+		else  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+				placeShips(player1Ships, window, player1instructions, board, player1);
+				break;
 		}
 		else {
-			window.clear();
-			window.draw(playerOneBanner);
-			window.display();
+				window.clear();
+				window.draw(playerOneBanner);
+				window.display();
 		}
 	}
 	window.clear();
 
 	while (true) {
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		sf::Event event;
+		if (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			placeShips(player2Ships, window, player2instructions, board, player2);
 			break;
 		}
@@ -151,12 +167,22 @@ int main()
 		window.display();
 		}
 	}
-
 	window.clear();
-	window.draw(playerOneBanner);
-	window.display();
-	for (int i = 0; i < 1000000000; i++) {
-
+	while (true) {
+		sf::Event event;
+		if (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			break;
+		}
+		else {
+			window.clear();
+			window.draw(playerOneBanner);
+			window.display();
+		}
 	}
 	bool player1_turn = true;
 	int victory = 0;
@@ -212,7 +238,12 @@ int main()
 
 								}
 								while (true) {
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+									if (window.pollEvent(event)) {
+										if (event.type == sf::Event::Closed) {
+											window.close();
+										}
+									}
+									else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 										player1_turn = false;
 										break;
 									}
@@ -256,7 +287,12 @@ int main()
 
 								}
 								while (true) {
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+									if (window.pollEvent(event)) {
+										if (event.type == sf::Event::Closed) {
+											window.close();
+										}
+									}
+									else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 										player1_turn = true;
 										break;
 									}
