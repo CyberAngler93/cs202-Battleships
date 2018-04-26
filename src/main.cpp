@@ -120,6 +120,13 @@ int main()
 	sf::RenderWindow window{ sf::VideoMode{ 400,840 }, "BATTLESHIPS!!", sf::Style::Titlebar | sf::Style::Close };
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
+	sf::Music music;
+	if (!music.openFromFile("../sounds/ocean.ogg")) {
+		throw std::runtime_error("Error loading music file ocean");
+	}
+	music.play();
+	music.setVolume(50);
+	music.setLoop(true);
 	sf::Texture bannerOne, bannerTwo, instructions1, instructions2, continueOne,startBanner;
 	if (!bannerOne.loadFromFile("../sprites/player_one.png")
 		|| !bannerTwo.loadFromFile("../sprites/player_two.png")
