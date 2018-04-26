@@ -16,16 +16,18 @@
 void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite instructions, Board & board, PlayerBoard& playerBoard) {
 	std::vector<int> shipPlacement{ 2,3,3,4,5 };
 
-	sf::Texture carrierText, battleshipText, cruiserText, submarineText, destroyerText;
+	sf::Texture carrierText, battleshipText, cruiserText, submarineText, destroyerText, continueTwo;
 	if (!carrierText.loadFromFile("../sprites/carrier.png")
 		|| !battleshipText.loadFromFile("../sprites/battleship.png")
 		|| !cruiserText.loadFromFile("../sprites/cruiser.png")
 		|| !submarineText.loadFromFile("../sprites/submarine.png")
-		|| !destroyerText.loadFromFile("../sprites/destroyer.png"))
+		|| !destroyerText.loadFromFile("../sprites/destroyer.png")
+		|| !continueTwo.loadFromFile("../sprites/continue2.png"))
 	{
 		throw std::runtime_error("Failed to load instruction sprites.");
 	}
-
+	sf::Sprite continueDirectionsTwo{ continueTwo };
+	continueDirectionsTwo.setPosition(0, 300);
 	std::vector<sf::Sprite> sprites;
 	sprites.push_back(sf::Sprite(destroyerText));
 	sprites.push_back(sf::Sprite(submarineText));
@@ -88,6 +90,8 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 		}
 		window.display();
 	}
+	window.draw(continueDirectionsTwo);
+	window.display();
 	while (true) {
 		sf::Event event;
 		if (window.pollEvent(event)) {
@@ -96,7 +100,7 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 			}
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-				break;
+			break;
 		}
 	}
 
@@ -107,15 +111,17 @@ int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{ 400,840 }, "SFML Window", sf::Style::Titlebar | sf::Style::Close };
 
-	sf::Texture bannerOne, bannerTwo, instructions1, instructions2;
+	sf::Texture bannerOne, bannerTwo, instructions1, instructions2, continueOne;
 	if (!bannerOne.loadFromFile("../sprites/player_one.png")
 		|| !bannerTwo.loadFromFile("../sprites/player_two.png")
 		|| !instructions1.loadFromFile("../sprites/player1instructions.png")
-		|| !instructions2.loadFromFile("../sprites/player2instructions.png"))
+		|| !instructions2.loadFromFile("../sprites/player2instructions.png")
+		|| !continueOne.loadFromFile("../sprites/continue1.png"))
 	{
 		throw std::runtime_error("Error in main -- failed to load sprites.");
 	}
-
+	sf::Sprite continueDirections{ continueOne };
+	continueDirections.setPosition(0, 600);
 	sf::Sprite playerOneBanner{ bannerOne };
 	playerOneBanner.setPosition(0, 400);
 	sf::Sprite playerTwoBanner{ bannerTwo };
@@ -131,7 +137,7 @@ int main()
 
 	std::vector<Ship> player1Ships;
 	std::vector<Ship> player2Ships;
-	while (true){
+	while (true) {
 		sf::Event event;
 		if (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -139,13 +145,14 @@ int main()
 			}
 		}
 		else  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-				placeShips(player1Ships, window, player1instructions, board, player1);
-				break;
+			placeShips(player1Ships, window, player1instructions, board, player1);
+			break;
 		}
 		else {
-				window.clear();
-				window.draw(playerOneBanner);
-				window.display();
+			window.clear();
+			window.draw(playerOneBanner);
+			window.draw(continueDirections);
+			window.display();
 		}
 	}
 	window.clear();
@@ -157,14 +164,15 @@ int main()
 				window.close();
 			}
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			placeShips(player2Ships, window, player2instructions, board, player2);
 			break;
 		}
 		else {
-		window.clear();
-		window.draw(playerTwoBanner);
-		window.display();
+			window.clear();
+			window.draw(playerTwoBanner);
+			window.draw(continueDirections);
+			window.display();
 		}
 	}
 	window.clear();
@@ -181,6 +189,7 @@ int main()
 		else {
 			window.clear();
 			window.draw(playerOneBanner);
+			window.draw(continueDirections);
 			window.display();
 		}
 	}
@@ -250,6 +259,7 @@ int main()
 									else {
 										window.clear();
 										window.draw(playerTwoBanner);
+										window.draw(continueDirections);
 										window.display();
 									}
 								}
@@ -299,6 +309,7 @@ int main()
 									else {
 										window.clear();
 										window.draw(playerOneBanner);
+										window.draw(continueDirections);
 										window.display();
 									}
 								}
