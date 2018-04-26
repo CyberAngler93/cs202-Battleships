@@ -5,6 +5,7 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <../include/board.hpp>
 #include <../include/playerboard.hpp>
 #include <../include/ship.hpp>
@@ -27,7 +28,7 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 		throw std::runtime_error("Failed to load instruction sprites.");
 	}
 	sf::Sprite continueDirectionsTwo{ continueTwo };
-	continueDirectionsTwo.setPosition(0, 300);
+	continueDirectionsTwo.setPosition(0, 400);
 	std::vector<sf::Sprite> sprites;
 	sprites.push_back(sf::Sprite(destroyerText));
 	sprites.push_back(sf::Sprite(submarineText));
@@ -90,9 +91,16 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 		}
 		window.display();
 	}
-	window.draw(continueDirectionsTwo);
-	window.display();
+
 	while (true) {
+		board.draw(window);
+		window.draw(continueDirectionsTwo);
+		if (!sprites.empty()) window.draw(sprites.back());
+		for (auto ship : ships)
+		{
+			ship.draw(window, true);
+		}
+		window.display();
 		sf::Event event;
 		if (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -110,16 +118,20 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{ 400,840 }, "SFML Window", sf::Style::Titlebar | sf::Style::Close };
-
-	sf::Texture bannerOne, bannerTwo, instructions1, instructions2, continueOne;
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+	sf::Texture bannerOne, bannerTwo, instructions1, instructions2, continueOne,startBanner;
 	if (!bannerOne.loadFromFile("../sprites/player_one.png")
 		|| !bannerTwo.loadFromFile("../sprites/player_two.png")
 		|| !instructions1.loadFromFile("../sprites/player1instructions.png")
 		|| !instructions2.loadFromFile("../sprites/player2instructions.png")
-		|| !continueOne.loadFromFile("../sprites/continue1.png"))
+		|| !continueOne.loadFromFile("../sprites/continue1.png")
+		|| !startBanner.loadFromFile("../sprites/BattleShipLogo.png"))
 	{
 		throw std::runtime_error("Error in main -- failed to load sprites.");
 	}
+	sf::Sprite gamelogo{ startBanner };
+	gamelogo.setPosition(0, 0);
 	sf::Sprite continueDirections{ continueOne };
 	continueDirections.setPosition(0, 600);
 	sf::Sprite playerOneBanner{ bannerOne };
@@ -137,6 +149,31 @@ int main()
 
 	std::vector<Ship> player1Ships;
 	std::vector<Ship> player2Ships;
+	if (!buffer.loadFromFile("../sounds/hit.wav")) {
+		throw std::runtime_error("Error loading sound file");
+	}
+	sound.setBuffer(buffer);
+	sound.play();
+	while (true) {
+
+		sf::Event event;
+		if (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+		else  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			break;
+		}
+		else {
+			window.draw(gamelogo);
+			window.draw(continueDirections);
+			window.display();
+		}
+	}
+
+	window.clear();
+
 	while (true) {
 		sf::Event event;
 		if (window.pollEvent(event)) {
@@ -243,7 +280,7 @@ int main()
 									window.draw(playerTwoBanner);
 								}
 								window.display();
-								for (int i = 0; i < 500000000; i++) {
+								for (int i = 0; i < 100000000; i++) {
 
 								}
 								while (true) {
@@ -293,7 +330,7 @@ int main()
 									window.draw(playerTwoBanner);
 								}
 								window.display();
-								for (int i = 0; i < 500000000; i++) {
+								for (int i = 0; i < 100000000; i++) {
 
 								}
 								while (true) {
@@ -358,6 +395,11 @@ int main()
 					{
 						throw std::runtime_error("Error in main -- failed to load victory sprite.");
 					}
+					if (!buffer.loadFromFile("../sounds/victory.wav")) {
+						throw std::runtime_error("Error loading sound file");
+					}
+					sound.setBuffer(buffer);
+					sound.play();
 					victoryBanner.setTexture(victoryTexture);
 					victorySprite = true;
 				}
@@ -367,6 +409,11 @@ int main()
 					{
 						throw std::runtime_error("Error in main -- failed to load victory sprite.");
 					}
+					if (!buffer.loadFromFile("../sounds/victory.wav")) {
+						throw std::runtime_error("Error loading sound file");
+					}
+					sound.setBuffer(buffer);
+					sound.play();
 					victoryBanner.setTexture(victoryTexture);
 					victorySprite = true;
 				}
