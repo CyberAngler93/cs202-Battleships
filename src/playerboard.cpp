@@ -7,11 +7,14 @@
 #include "../include/playerboard.hpp"
 #include "../include/ship.hpp"
 
+#include <SFML/Audio.hpp>
+
 #include <utility>
 #include <vector>
 #include <stdexcept>
 
-
+sf::SoundBuffer buffer;
+sf::Sound sound;
 
 // Constructors
 PlayerBoard::PlayerBoard()
@@ -125,6 +128,8 @@ std::pair<bool,bool> PlayerBoard::getSquare(int index)
 
 void PlayerBoard::setSquare(int index, const std::pair<bool,bool> & newSquare)
 {
+
+
 	if(index >= 0 && index <= 99)
 	{
 		_board[index] = newSquare;
@@ -133,11 +138,22 @@ void PlayerBoard::setSquare(int index, const std::pair<bool,bool> & newSquare)
 		if (newSquare.first) {
 			// If the index contains a ship
 			if(newSquare.second) {
-				// Is a hit
+				if (!buffer.loadFromFile("../sounds/hit.wav")) {
+					throw std::runtime_error("Error loading sound file");
+				}
+				sound.setBuffer(buffer);
 				_shots[index].setFillColor(sf::Color::Red);
+				sound.play();
+				// Is a hit
 			} else {
 				// Is a miss
+				if (!buffer.loadFromFile("../sounds/miss.wav")) {
+					throw std::runtime_error("Error loading sound file");
+				}
+				sound.setBuffer(buffer);
 				_shots[index].setFillColor(sf::Color::White);
+				sound.play();
+				
 			}
 		}
 	}
