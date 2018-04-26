@@ -1,4 +1,4 @@
-/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, unknown
+/*	Authors:		Jeremy Thomas, Jared Ridlington, William Brighton, Matt Perry, Jason Herning
  *	Filename:		ship.hpp
  *	Class :			CS 202
  *	Purpose:		Group Project: BattleShips
