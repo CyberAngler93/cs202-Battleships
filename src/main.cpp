@@ -117,7 +117,7 @@ void placeShips(std::vector<Ship> & ships, sf::RenderWindow & window, sf::Sprite
 
 int main()
 {
-	sf::RenderWindow window{ sf::VideoMode{ 400,840 }, "SFML Window", sf::Style::Titlebar | sf::Style::Close };
+	sf::RenderWindow window{ sf::VideoMode{ 400,840 }, "BATTLESHIPS!!", sf::Style::Titlebar | sf::Style::Close };
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 	sf::Texture bannerOne, bannerTwo, instructions1, instructions2, continueOne,startBanner;
